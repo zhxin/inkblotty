@@ -1,8 +1,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+    <!--
     <title>{{ .Title }}{{ if ne .Title .Site.Title}} - {{ .Site.Title }}{{end}}</title>
-
+    -->
     <style type="text/css">
         img.wp-smiley,
         img.emoji {
@@ -19,5 +20,6 @@
     </style>
     <link rel='stylesheet' href='{{ "css/style.css" | absURL }}' type='text/css' media='all' />
     <link rel='stylesheet' href='{{ "css/custom.css" | absURL }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ "css/github.css" | absURL }}' type='text/css' media='all' />
     {{ template "_internal/google_analytics.html" . }}    
 </head>
