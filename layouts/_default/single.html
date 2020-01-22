@@ -1,4 +1,4 @@
- {{ define "main" }}
+{{ define "main" }}
 
 <main role="main">
     <article role="article" class="post type-post format-standard hentry">
@@ -8,10 +8,11 @@
                 <a rel="bookmark">
                     <time datetime="{{ .Date.Format "2006-01-02T12:34:56" }}">{{ .Date.Format "2006-01-02" }}</time>
                 </a>
-				{{- if ne .Date .Lastmod }}
-				<a rel="bookmark">
-					<time datetime="{{ .Lastmod.Format "2006-01-02T12:34:56" }}">(Last Modified: {{.Lastmod.Format ( .Site.Params.dateformat | default "2006-01-02")}})</time>
-				</a>
+                {{- if ne .Date .Lastmod }}
+                <a rel="bookmark">
+                    <time datetime="{{ .Lastmod.Format "2006-01-02T12:34:56" }}">(Last Modified:
+                        {{.Lastmod.Format ( .Site.Params.dateformat | default "2006-01-02")}})</time>
+                </a>
                 {{- end }}
                 <!--
 				{{ partial "share.html" . }}
@@ -26,29 +27,29 @@
 
 
         <footer class="post-footer">
-                {{ $categories := .Params.categories }}
-                {{ $all_categories := .Site.Taxonomies.categories }}
-                {{ with $categories }}
-                <span class="post-categories">
-                    {{- range $all_categories -}}
-                        {{ if in $categories .Page.Title }}
-                        <a href="{{- .Page.Permalink -}}">{{ .Page.Title }}</a>&emsp;
-                        {{ end }}
-                    {{- end }}
-                </span>
+            {{ $categories := .Params.categories }}
+            {{ $all_categories := .Site.Taxonomies.categories }}
+            {{ with $categories }}
+            <span class="post-categories">
+                {{- range $all_categories -}}
+                {{ if in $categories .Page.Title }}
+                <a href="{{- .Page.Permalink -}}">{{ .Page.Title }}</a>&emsp;
                 {{ end }}
-        
-                {{ $tags := .Params.tags }}
-                {{ $all_tags := .Site.Taxonomies.tags }}
-                {{ with $tags }}
-                <span class="post-tags">
-                    {{- range $all_tags -}}
-                        {{ if in $tags .Page.Title }}
-                        <a href="{{- .Page.Permalink -}}">{{ .Page.Title }}</a>&emsp;
-                        {{ end }}
-                    {{- end }}
-                </span>
+                {{- end }}
+            </span>
+            {{ end }}
+
+            {{ $tags := .Params.tags }}
+            {{ $all_tags := .Site.Taxonomies.tags }}
+            {{ with $tags }}
+            <span class="post-tags">
+                {{- range $all_tags -}}
+                {{ if in $tags .Page.Title }}
+                <a href="{{- .Page.Permalink -}}">{{ .Page.Title }}</a>&emsp;
                 {{ end }}
+                {{- end }}
+            </span>
+            {{ end }}
         </footer>
         {{ partial "ad_double_rectangle.html" . }}
         {{ partial "relatedposts.html" . }}
@@ -70,10 +71,19 @@
         </div>
     </nav>
     <section>
+        <!--
         {{ template "_internal/disqus.html" . }}
+	    -->
+
+        {{- if .Site.Params.utter.repo -}}
+        <div id="utter-container"></div>
+        <script src="https://utteranc.es/client.js" repo='{{ .Site.Params.utter.repo }}'
+            issue-term="{{ .Site.Params.utter.issueTerm }}" theme='{{ .Site.Params.utter.theme }}'
+            crossorigin="anonymous" async>
+            </script>
+        {{- end }}
     </section>
     {{ end }}
-
 </main>
 
 {{ end }}
